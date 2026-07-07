@@ -1,0 +1,31 @@
+baseURL = "https://go-yjs-relay.github.io/"
+title = "go-yjs-relay"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap", "404"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[[params.phases]]
+  name = "Rooms & Hub multiplexing"
+  status = "ready"
+  blurb = "One `Room` per collaborative document, keyed by room ID. `Hub.Join` inserts a connection and hands back a `Membership` handle; `Hub.MembersCount` surfaces the live peer count that is the bidirectional-sync precondition."
+[[params.phases]]
+  name = "Fan-out broadcast"
+  status = "ready"
+  blurb = "Every binary frame a member `Send`s is delivered to every *other* member's `Recv` channel — echo-suppressed, so a client never sees its own frame. The fan-out runs under a tight per-room lock, microseconds even at hundreds of members."
+[[params.phases]]
+  name = "Slow-peer drop & room GC"
+  status = "ready"
+  blurb = "A member whose receive buffer is full has the frame dropped rather than blocking the hub — Yjs re-syncs it via the next sync-step handshake. One straggler never stalls the room, and the room is reclaimed when its last member leaves."
+[[params.phases]]
+  name = "Lifecycle: idempotent & context-driven leave"
+  status = "ready"
+  blurb = "`Membership.Leave` is idempotent (safe from a deferred cleanup and a watcher at once); `LeaveOnContextDone(ctx)` unregisters the connection when its request context cancels, saving the caller a goroutine."
+[[params.phases]]
+  name = "Transport-agnostic core & coverage"
+  status = "ready"
+  blurb = "No WebSocket library is imported: the `Membership` handle is the seam any transport plugs into (nhooyr, gorilla, net/http, or an in-memory pipe). 100% coverage under `-race`, gofmt + go vet clean, green across all six 64-bit Go arches."
+[[params.phases]]
+  name = "Persistence & snapshotting"
+  status = "planned"
+  blurb = "Downstream by design: the relay holds no durable state. Persistence is bolted on by serialising the last update from any one client to a backing store — an opt-in layer above the relay, not part of the hub."
