@@ -41,15 +41,13 @@
   <div class="hero"><div class="wrap">
     <div>
       <h1 class="head">go-yjs-relay</h1>
-      <p class="sub">A pure-Go Yjs y-websocket relay hub — transport-agnostic, forward-compatible, no cgo.</p>
-      <div class="cta">
-        <a class="btn btn-primary" href="/docs/">{{ partial "icons/book.html" . }}Documentation</a>
-        <a class="btn btn-ghost" href="https://github.com/go-yjs-relay/yrelay">{{ partial "icons/github.html" . }}GitHub</a>
-      </div>
-      <div class="trust">{{ if not (partial "mantra-on.html" $) }}<span class="pill">pure Go · zero cgo</span>{{ end }}<span class="pill">Yjs y-websocket</span><span class="pill">relay, not a CRDT</span><span class="pill">transport-agnostic</span><span class="pill">room multiplexing</span><span class="pill">fan-out broadcast</span><span class="pill">slow-peer drop</span><span class="pill">room GC</span><span class="pill">context-driven leave</span><span class="pill">100% coverage · -race</span><span class="pill">6 arches</span></div>
+      <p class="sub">A {{ if partial "mantra-on.html" . }}Go{{ else }}pure-Go{{ end }} Yjs y-websocket relay hub — transport-agnostic, forward-compatible, {{ if not (partial "mantra-on.html" $) }}no cgo{{ end }}.</p>
+      {{/* [[params.cta]] in hugo.toml: the kit renders the row */}}
+      {{ partial "cta.html" . }}
+      <div class="trust">{{ if not (partial "mantra-on.html" $) }}{{ if not (partial "mantra-on.html" $) }}<span class="pill">pure Go · zero cgo</span>{{ end }}{{ end }}<span class="pill">Yjs y-websocket</span><span class="pill">relay, not a CRDT</span><span class="pill">transport-agnostic</span><span class="pill">room multiplexing</span><span class="pill">fan-out broadcast</span><span class="pill">slow-peer drop</span><span class="pill">room GC</span><span class="pill">context-driven leave</span><span class="pill">100% coverage · -race</span><span class="pill">6 arches</span></div>
       <div class="legacy"><div class="badges">
       <a href="/docs/"><img alt="Documentation (MkDocs Material + mike)" src="https://img.shields.io/badge/docs-mkdocs--material-14B8A6"></a>
-      {{ if not (partial "mantra-on.html" $) }}<a href="https://github.com/go-yjs-relay/yrelay/blob/main/LICENSE"><img alt="License: BSD-3-Clause" src="https://img.shields.io/badge/license-BSD--3--Clause-blue"></a>{{ end }}
+      {{ if not (partial "mantra-on.html" $) }}{{ if not (partial "mantra-on.html" $) }}<a href="https://github.com/go-yjs-relay/yrelay/blob/main/LICENSE"><img alt="License: BSD-3-Clause" src="https://img.shields.io/badge/license-BSD--3--Clause-blue"></a>{{ end }}{{ end }}
       <a href="https://go.dev/dl/"><img alt="Go 1.26.4+" src="https://img.shields.io/badge/go-1.26.4%2B-00ADD8"></a>
       <a href="https://github.com/go-yjs-relay/yrelay"><img alt="Coverage 100%" src="https://img.shields.io/badge/coverage-100%25-1a7f37"></a>
     </div></div>
